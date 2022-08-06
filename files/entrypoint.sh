@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
  
-chown -Rh minecraft /home/minecraft/
+chown -Rh minecraft /data/
  
 exec "$@"

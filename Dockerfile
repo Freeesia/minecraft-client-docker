@@ -2,7 +2,7 @@ FROM ubuntu:20.04 AS base
 
 EXPOSE 5900
 ADD https://launcher.mojang.com/download/Minecraft.deb /tmp/
- 
+
 RUN apt-get update -q && \
     apt-get upgrade -yq && \
     apt-get install -yq --no-install-recommends \
@@ -17,13 +17,13 @@ RUN apt-get update -q && \
     rm -rf /var/lib/apt/lists/* &&\
     rm /tmp/Minecraft.deb && \
     useradd -m -U minecraft
- 
+
 COPY files /
- 
-VOLUME [ "/home/minecraft/.minecraft/" ]
- 
+
+VOLUME [ "/data/" ]
+
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
- 
+
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 
@@ -33,3 +33,4 @@ RUN apt-get update -q && \
     localedef -i ja_JP -c -f UTF-8 -A /usr/share/locale/locale.alias ja_JP.UTF-8 &&\
     apt-get install -yq --no-install-recommends fonts-ipafont &&\
     rm -rf /var/lib/apt/lists/*
+ENV LANG=ja_JP.UTF-8
