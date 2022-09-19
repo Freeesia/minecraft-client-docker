@@ -1,2 +1,2 @@
 docker build -t tmp .
-docker run -it --rm -v $(pwd)/data:/data/ -p 5900:5900 tmp
+docker run -it --rm -p 8080:8080 --gpus all --name desktop tmp $@
